@@ -1,3 +1,5 @@
+python
+
 import streamlit as st
 from datetime import datetime, timedelta
 import sqlite3
@@ -25,7 +27,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 3. الاتصال التلقائي بقاعدة البيانات السحابية وإنشاء الجداول
-db = sqlite3.connect("secure_documents_v3.db", check_same_thread=False)
+db = sqlite3.connect("secure_documents_v4.db", check_same_thread=False)
 db.execute("""
     CREATE TABLE IF NOT EXISTS reqs (
         id TEXT PRIMARY KEY, 
@@ -67,7 +69,7 @@ def check_time_and_lock(limit_str, status):
         else:
             return f"🚨 متبقي {hours} ساعة فقط!", False, 20, "red"
     except:
-        return "غير محدد", False, 100, "gray"
+        return "غير حدد", False, 100, "gray"
 
 # 6. إدارة الجلسة ونظام تسجيل الدخول الحامي للمنصة
 if "logged_in" not in st.session_state:
@@ -78,7 +80,7 @@ if "logged_in" not in st.session_state:
 
 if not st.session_state["logged_in"]:
     st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
-    col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
+    col_l1, col_l2, col_l3 = st.columns()
     with col_l2:
         st.markdown("""
             <div style='text-align: center; margin-bottom: 20px;'>
@@ -119,7 +121,7 @@ st.markdown("""
                 <span class="material-symbols-outlined" style="font-size: 28px;">description</span>
             </div>
             <div>
-                <h1 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin: 0;">موديول طلبات المستندات والمرفقات <span style="font-size: 14px; font-weight: 400; color: #6b7280;">(نسخة مصغرة)</span></h1>
+                <h1 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin: 0;">مواجهة طلبات المستندات والمرفقات <span style="font-size: 14px; font-weight: 400; color: #6b7280;">(نسخة مصغرة)</span></h1>
                 <p style="font-size: 12px; color: #9ca3af; margin: 4px 0 0 0;">منصة التنسيق والتدقيق المستندي بين فريق المراجعة والشركة</p>
             </div>
         </div>
@@ -174,7 +176,7 @@ if st.session_state["role"] == "مراجع":
     """, unsafe_allow_html=True)
     
     with st.form("add_form", clear_on_submit=True):
-        f1, f2, f3 = st.columns([2, 1, 1])
+        f1, f2, f3 = st.columns(3)
         with f1:
             r_title = st.text_input("المستند المطلوب:", placeholder="مثال: ميزان المراجعة لعام 2025")
         with f2:
@@ -196,3 +198,6 @@ st.markdown("---")
 
 # --- عرض جدول المرفقات الرئيسي بالشكل الكحلي الأصلي الفاخر ---
 st.markdown("""
+    <h3 style="font-size: 15px; font-weight: 700; color: #1e3a8a; margin-bottom: 16px; display: flex; align-items: center; gap: 4px;">
+
+يُرجى استخدام الرمز البرمجي بحذر.
